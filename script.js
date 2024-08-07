@@ -48,7 +48,7 @@ function addMessage(message, isUser = false) {
 
 async function sendMessage(message) {
     try {
-        const response = await fetch(`${API_URL}?q=${encodeURIComponent(message)}&uid=${UID}`);
+        const response = await fetch(`${API_URL}?prompt=${encodeURIComponent(message)}&uid=${UID}`);
         if (!response.ok) {
             throw new Error('API request failed');
         }
