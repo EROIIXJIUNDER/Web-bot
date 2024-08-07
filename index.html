@@ -51,27 +51,7 @@
         const sendButton = document.getElementById('send-button');
 
         // API endpoint
-        const API_URL = 'https://asmit-docs.onrender.com/Gpt';
-
-        function generateRandomString(length = 10) {
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let result = '';
-            for (let i = 0; i < length; i++) {
-                result += characters.charAt(Math.floor(Math.random() * characters.length));
-            }
-            return result;
-        }
-
-        function getUID() {
-            let uid = localStorage.getItem('chatbotUID');
-            if (!uid) {
-                uid = generateRandomString(20); 
-                localStorage.setItem('chatbotUID', uid);
-            }
-            return uid;
-        }
-
-        const UID = getUID();
+        const API_URL = 'https://asmit-docs.onrender.com/Qwen?prompt=';
 
         function addMessage(message, isUser = false) {
             const messageElement = document.createElement('div');
@@ -102,12 +82,12 @@
 
         async function sendMessage(message) {
             try {
-                const response = await fetch(`${API_URL}?prompt=${encodeURIComponent(prompt)}&uid=${UID}`);
+                const response = await fetch(`${API_URL}${encodeURIComponent(message)}`);
                 if (!response.ok) {
                     throw new Error('API request failed');
                 }
-                const text = await response.text(); 
-                return text; 
+                const json = await response.json(); 
+                return json.answer; 
             } catch (error) {
                 console.error('Error:', error);
                 return 'Sorry, there was an error processing your request.';
