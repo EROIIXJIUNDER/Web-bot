@@ -4,7 +4,7 @@ const userInput = document.getElementById('user-input');
 const sendButton = document.getElementById('send-button');
 
 // API endpoint
-const API_URL = 'https://samirxpikachuio.onrender.com/bell';
+const API_URL = 'https://asmit-docs.onrender.com/Gpt?prompt';
 
 
 function generateRandomString(length = 10) {
